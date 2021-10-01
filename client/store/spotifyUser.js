@@ -18,6 +18,7 @@ const fetchUser = () => {
       //console.log(userInfo);
       const { data: token } = await axios.get("/token");
       console.log(token);
+      process.env.TOKEN = token;
       dispatch(showUser(userInfo));
       //console.log("thunk token", process.env.TOKEN);
     } catch (error) {
