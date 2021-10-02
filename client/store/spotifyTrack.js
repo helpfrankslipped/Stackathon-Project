@@ -1,4 +1,5 @@
 import axios from "axios";
+import getToken from "../token";
 
 const GET_CURRENT_TRACK = "GET_CURRENT_TRACK";
 
@@ -12,16 +13,21 @@ const getCurrentTrack = (track) => {
 // thunk
 const fetchCurrentTrack = () => {
   return async (dispatch) => {
+    const access_token = await getToken();
+    console.log("access token get track", access_token);
     try {
       const { data: currentTrack } = await axios.get(
         "https://api.spotify.com/v1/me/player/currently-playing",
         {
+          params: {
+            market: "US",
+          },
           headers: {
-            authorization: process.env.TOKEN,
+            Authorization: `Bearer ${access_token}`,
           },
         }
       );
-      console.log(currentTrack);
+      console.log('track info', currentTrack);
       dispatch(getCurrentTrack(currentTrack));
     } catch (error) {
       return `Error ${error.message} current track thunk`;

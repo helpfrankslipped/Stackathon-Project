@@ -10,8 +10,6 @@ const clientID = process.env.CLIENT_ID;
 const clientSecret = process.env.CLIENT_SECRET;
 const port = process.env.PORT;
 
-let token = "";
-
 const ensureAuth = (req, res, next) => {
   if (req.isAuthenticated()) {
     return next();
@@ -63,16 +61,11 @@ spotifyRouter.get("/token", (req, res) => {
   res.send(process.env.TOKEN);
 });
 
-// unsure about this bc we have our react app running
-// spotifyRouter.get('/account', ensureAuth, (req, res) => {
-//   res.render
-// })
-
 // grabbing info based on the available scopes;
 spotifyRouter.get(
   "/auth/spotify",
   passport.authenticate("spotify", {
-    scope: ["user-read-email", "user-read-private"],
+    scope: ["user-read-email", "user-read-private", "user-read-playback-state"],
     showDialog: true,
   })
 );

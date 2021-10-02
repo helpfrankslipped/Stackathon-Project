@@ -2,15 +2,18 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchUser } from "../store/spotifyUser";
 import { Link } from "react-router-dom";
+import { fetchCurrentTrack } from "../store/spotifyTrack";
 
 class TestRedirect extends Component {
   componentDidMount() {
     this.props.fetchUser();
-    console.log("mounted!");
+    console.log("user loaded");
+    this.props.fetchTrack();
+    console.log("track mounted!");
   }
 
   render() {
-    console.log("user info", this.props.user.user);
+    console.log("User Props", this.props);
     const userInfo = this.props.user.user;
     if (!userInfo) {
       return (
@@ -20,7 +23,6 @@ class TestRedirect extends Component {
       );
     }
     const { displayName, photos, profileUrl } = this.props.user.user;
-    console.log("display", photos[0].value);
     const displayImage = photos[0].value;
     return (
       <div>
@@ -37,12 +39,14 @@ class TestRedirect extends Component {
 const mapState = (state) => {
   return {
     user: state.user,
+    track: state.track,
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
     fetchUser: () => dispatch(fetchUser()),
+    fetchTrack: () => dispatch(fetchCurrentTrack()),
   };
 };
 
