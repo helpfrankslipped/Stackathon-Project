@@ -23,8 +23,7 @@ form div {
 /* ===============================
       CURRENT TRACK BAR
 ==================================*/
-
-.current-track-info {
+.bottom-bar-container {
   display: flex;
   flex-direction: row;
   background-color: #333;
@@ -33,6 +32,11 @@ form div {
   bottom: 0;
   width: 100%;
   height: 150px;
+}
+
+.current-track-info {
+  display: flex;
+  flex-direction: row;
 }
 
 .track-text {

@@ -30,8 +30,6 @@ class Routes extends Component {
         <Switch>
           <Route exact path="/" exact component={SpotifyLogin} />
           <Route exact path="/visuals" component={Visuals} />
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={Signup} />
         </Switch>
         {/* )} */}
       </div>

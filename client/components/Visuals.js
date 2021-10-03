@@ -4,6 +4,7 @@ import { fetchUser } from "../store/spotifyUser";
 import { Link } from "react-router-dom";
 import { fetchCurrentTrack } from "../store/spotifyTrack";
 import { fetchTrackInfo } from "../store/trackInfo";
+import TrackBar from "./TrackBar";
 
 class Visuals extends Component {
   componentDidMount() {
@@ -26,14 +27,13 @@ class Visuals extends Component {
       );
     }
     const { displayName, photos, profileUrl } = this.props.user.user;
-    const displayImage = photos[0].value;
+    //const displayImage = photos[0].value;
     return (
-      <div>
-        <img src={displayImage} />
-        <h1>Hello {displayName}!!</h1>
-        <a href={profileUrl}>
-          <h3>Your Profile...</h3>
-        </a>
+      <div className="whole-page">
+        <div className="visuals-container">
+          <h1>Hello {displayName}!!</h1>
+        </div>
+        <TrackBar />
       </div>
     );
   }

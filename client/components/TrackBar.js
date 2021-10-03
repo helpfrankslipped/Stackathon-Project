@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchCurrentTrack } from "../store/spotifyTrack";
+import { fetchUser } from "../store/spotifyUser";
 
 class TrackBar extends Component {
   constructor() {
@@ -9,12 +10,17 @@ class TrackBar extends Component {
 
   componentDidMount() {
     this.props.fetchTrack();
+    this.props.fetchUser();
   }
 
   render() {
-    console.log("trackbar props", this.props.track.item);
+    // user stuff
+    const userInfo = this.props.user.user;
+
+    // track stuff
+    //console.log("trackbar props", this.props.track.item);
     const item = this.props.track.item;
-    if (!item) {
+    if (!item || !userInfo) {
       return (
         <div>
           <h4>Loading...</h4>
@@ -27,14 +33,25 @@ class TrackBar extends Component {
     const title = item.name;
     const albumTitle = album.name;
     const artist = artists[0].name;
+    const { displayName, photos, profileUrl } = this.props.user.user;
+    const displayImage = photos[0].value;
     return (
-      <div className="current-track-info">
-        <h2>Now Playing:</h2>
-        <img src={imageSrc} />
-        <div className="track-text">
-          <p>{title}</p>
-          <p>{albumTitle}</p>
-          <p>{artist}</p>
+      <div className="bottom-bar-container">
+        <div className="current-track-info">
+          <h2>Now Playing:</h2>
+          <img src={imageSrc} />
+          <div className="track-text">
+            <p>{title}</p>
+            <p>{albumTitle}</p>
+            <p>{artist}</p>
+          </div>
+        </div>
+        <div className="user-info">
+          {/* <img src={displayImage} /> */}
+          <h3>Logged-In as: {displayName}!</h3>
+          <a href={profileUrl}>
+            <h3>Your Profile...</h3>
+          </a>
         </div>
       </div>
     );
@@ -46,6 +63,7 @@ class TrackBar extends Component {
  */
 const mapState = (state) => {
   return {
+    user: state.user,
     track: state.track,
   };
 };
@@ -53,6 +71,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     fetchTrack: () => dispatch(fetchCurrentTrack()),
+    fetchUser: () => dispatch(fetchUser()),
   };
 };
 
