@@ -14,7 +14,7 @@ const getCurrentTrack = (track) => {
 const fetchCurrentTrack = () => {
   return async (dispatch) => {
     const access_token = await getToken();
-    console.log("access token get track", access_token);
+    //console.log("access token get track", access_token);
     try {
       const { data: currentTrack } = await axios.get(
         "https://api.spotify.com/v1/me/player/currently-playing",
@@ -27,7 +27,7 @@ const fetchCurrentTrack = () => {
           },
         }
       );
-      console.log('track info', currentTrack);
+      //console.log("track info", currentTrack);
       dispatch(getCurrentTrack(currentTrack));
     } catch (error) {
       return `Error ${error.message} current track thunk`;

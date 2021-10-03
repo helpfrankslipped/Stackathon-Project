@@ -3,17 +3,20 @@ import { connect } from "react-redux";
 import { fetchUser } from "../store/spotifyUser";
 import { Link } from "react-router-dom";
 import { fetchCurrentTrack } from "../store/spotifyTrack";
+import { fetchTrackInfo } from "../store/trackInfo";
 
-class TestRedirect extends Component {
+class Visuals extends Component {
   componentDidMount() {
     this.props.fetchUser();
-    console.log("user loaded");
+    //console.log("user loaded");
     this.props.fetchTrack();
-    console.log("track mounted!");
+    //console.log("track mounted!");
+    this.props.fetchTrackInfo();
+    //console.log("info mounted");
   }
 
   render() {
-    console.log("User Props", this.props);
+    //console.log("User Props", this.props);
     const userInfo = this.props.user.user;
     if (!userInfo) {
       return (
@@ -40,6 +43,7 @@ const mapState = (state) => {
   return {
     user: state.user,
     track: state.track,
+    trackInfo: state.trackInfo,
   };
 };
 
@@ -47,7 +51,8 @@ const mapDispatch = (dispatch) => {
   return {
     fetchUser: () => dispatch(fetchUser()),
     fetchTrack: () => dispatch(fetchCurrentTrack()),
+    fetchTrackInfo: () => dispatch(fetchTrackInfo()),
   };
 };
 
-export default connect(mapState, mapDispatch)(TestRedirect);
+export default connect(mapState, mapDispatch)(Visuals);

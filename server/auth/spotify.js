@@ -10,12 +10,12 @@ const clientID = process.env.CLIENT_ID;
 const clientSecret = process.env.CLIENT_SECRET;
 const port = process.env.PORT;
 
-const ensureAuth = (req, res, next) => {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect("/login");
-};
+// const ensureAuth = (req, res, next) => {
+//   if (req.isAuthenticated()) {
+//     return next();
+//   }
+//   res.redirect("/login");
+// };
 
 passport.serializeUser(function (user, done) {
   done(null, user);
@@ -53,7 +53,7 @@ spotifyRouter.use(passport.session());
 
 // gets the info about current logged in user
 spotifyRouter.get("/user", (req, res) => {
-  console.log("TOKENTOKENTOKEN", process.env.TOKEN);
+  //console.log("TOKENTOKENTOKEN", process.env.TOKEN);
   res.send({ user: req.user });
 });
 
@@ -75,7 +75,7 @@ spotifyRouter.get(
   passport.authenticate("spotify"),
   // { failureRedirect: "/" },
   (req, res) => {
-    res.redirect("/test");
+    res.redirect("/visuals");
   }
 );
 

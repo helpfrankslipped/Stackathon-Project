@@ -5,11 +5,13 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import auth from "./auth";
 import userReducer from "./spotifyUser";
 import trackReducer from "./spotifyTrack";
+import trackInfoReducer from "./trackInfo";
 
 const reducer = combineReducers({
   auth,
   user: userReducer,
   track: trackReducer,
+  trackInfo: trackInfoReducer,
 });
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
