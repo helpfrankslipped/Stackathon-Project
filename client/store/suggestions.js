@@ -31,8 +31,6 @@ const fetchTrackSuggestions = () => {
           },
         }
       );
-
-      console.log("recs (thunk file):", trackSuggestions);
       dispatch(getTrackSuggestions(trackSuggestions));
     } catch (error) {
       return `Error ${error.message} suggestions thunk`;

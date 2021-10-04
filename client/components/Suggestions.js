@@ -12,7 +12,6 @@ class Suggestions extends Component {
   }
 
   render() {
-    console.log("props suggestions", this.props.suggestions.tracks);
     const suggestionArr = this.props.suggestions.tracks;
     if (!suggestionArr) {
       return (

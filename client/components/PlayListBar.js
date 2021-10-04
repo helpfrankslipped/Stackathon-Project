@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getNewPlaylist } from "../store/newPlaylist";
+import SinglePlaylistTrack from "./SinglePlaylistTrack";
 
 class PlayListBar extends Component {
   constructor() {
@@ -12,12 +13,23 @@ class PlayListBar extends Component {
   }
 
   render() {
-    console.log("playlist props", this.props);
-    const playlist = this.props.playlist;
-    console.log(playlist.items);
+    const playlistTracks = this.props.playlist.items;
+    if (!playlistTracks) {
+      return <div>loading...</div>;
+    }
     return (
       <div className="playlist-container">
-        <h3>Current Setlist</h3>
+        <h3>Setlist:</h3>
+        <ul>
+          {playlistTracks.map((track) => {
+            return (
+              <SinglePlaylistTrack
+                key={playlistTracks.indexOf(track)}
+                track={track.track}
+              />
+            );
+          })}
+        </ul>
       </div>
     );
   }
