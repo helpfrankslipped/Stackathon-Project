@@ -4,9 +4,10 @@ import { fetchUser } from "../store/spotifyUser";
 import { Link } from "react-router-dom";
 import { fetchCurrentTrack } from "../store/spotifyTrack";
 import { fetchTrackInfo } from "../store/trackInfo";
-import TrackBar from "./TrackBar";
+import NowPlaying from "./NowPlaying";
+import PlayListBar from "./PlayListBar";
 
-class Visuals extends Component {
+class Suggestions extends Component {
   componentDidMount() {
     this.props.fetchUser();
     //console.log("user loaded");
@@ -30,10 +31,11 @@ class Visuals extends Component {
     //const displayImage = photos[0].value;
     return (
       <div className="whole-page">
+        <PlayListBar />
         <div className="visuals-container">
           <h1>Hello {displayName}!!</h1>
         </div>
-        <TrackBar />
+        <NowPlaying />
       </div>
     );
   }
@@ -55,4 +57,4 @@ const mapDispatch = (dispatch) => {
   };
 };
 
-export default connect(mapState, mapDispatch)(Visuals);
+export default connect(mapState, mapDispatch)(Suggestions);

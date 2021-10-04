@@ -4,7 +4,7 @@ import { withRouter, Route, Switch, Redirect } from "react-router-dom";
 import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
 import SpotifyLogin from "./components/SpotifyLogin";
-import Visuals from "./components/Visuals";
+import Suggestions from "./components/Suggestions";
 import { me } from "./store";
 
 /**
@@ -29,7 +29,7 @@ class Routes extends Component {
         ) : ( */}
         <Switch>
           <Route exact path="/" exact component={SpotifyLogin} />
-          <Route exact path="/visuals" component={Visuals} />
+          <Route exact path="/visuals" component={Suggestions} />
         </Switch>
         {/* )} */}
       </div>

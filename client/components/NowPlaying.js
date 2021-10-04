@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { fetchCurrentTrack } from "../store/spotifyTrack";
 import { fetchUser } from "../store/spotifyUser";
 
-class TrackBar extends Component {
+class NowPlaying extends Component {
   constructor() {
     super();
   }
@@ -28,6 +28,8 @@ class TrackBar extends Component {
       );
     }
     const { album, artists } = this.props.track.item;
+    console.log("track", this.props.track);
+    console.log("artist", artists);
     console.log("album", album);
     const imageSrc = album.images[0].url;
     const title = item.name;
@@ -75,4 +77,4 @@ const mapDispatch = (dispatch) => {
   };
 };
 
-export default connect(mapState, mapDispatch)(TrackBar);
+export default connect(mapState, mapDispatch)(NowPlaying);
