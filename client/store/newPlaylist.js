@@ -1,8 +1,8 @@
 import axios from "axios";
-import getToken from "../token";
+import getToken, { getUserId } from "../token";
 
 const GET_PLAYLIST = "GET_PLAYLIST";
-const ADD_TRACK = "ADD_TRACK";
+const CREATE_PLAYLIST = "CREATE_PLAYLIST";
 
 const getPlaylist = (playlist) => {
   return {
@@ -11,32 +11,68 @@ const getPlaylist = (playlist) => {
   };
 };
 
-const addNewTrack = (track) => {
+const createPlaylist = (playlistObj) => {
   return {
-    type: ADD_TRACK,
-    track,
+    type: CREATE_PLAYLIST,
+    playlistObj,
   };
 };
 
 // thunk
-// helper function to return current track;
-const returnCurrentTrack = async () => {
-  const access_token = await getToken();
-  //console.log("access token get track", access_token);
-  try {
-    const { data: currentTrack } = await axios.get(
-      "https://api.spotify.com/v1/me/player/currently-playing",
-      {
-        params: {
-          market: "US",
-        },
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-        },
-      }
-    );
-    return currentTrack;
-  } catch (error) {
-    return `Error ${error.message} returnCurrentTrack`;
+const getNewPlaylist = () => {
+  return async (dispatch) => {
+    const access_token = await getToken();
+    const playlistId = "1yy3mVwhTfkzj5sUxvjjLA";
+    try {
+      const { data: userPlaylist } = await axios.get(
+        `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
+        {
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+          },
+        }
+      );
+      dispatch(getPlaylist(userPlaylist));
+    } catch (error) {
+      return `Error ${error.message} GET playlist`;
+    }
+  };
+};
+
+const createNewPlaylist = () => {
+  return async (dispatch) => {
+    const access_token = getToken();
+    const userId = getUserId();
+    try {
+      const { data: newPlaylist } = await axios.post(
+        `https://api.spotify.com/v1/users/${userId}/playlists`,
+        {
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+          },
+          name: "Setlist",
+        }
+      );
+      console.log("new playlist", newPlaylist);
+      dispatch(createPlaylist(newPlaylist));
+    } catch (error) {
+      return `Error ${error.message} create playlist`;
+    }
+  };
+};
+
+const playlistReducer = (state = {}, action) => {
+  switch (action.type) {
+    case GET_PLAYLIST:
+      return action.playlist;
+    case CREATE_PLAYLIST:
+      return action.playlistObj;
+    default:
+      return state;
   }
 };
+
+export { createNewPlaylist, getNewPlaylist };
+export default playlistReducer;
+
+//https://open.spotify.com/playlist/1yy3mVwhTfkzj5sUxvjjLA?si=41429e4526d54ba8

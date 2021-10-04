@@ -1,41 +1,43 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchUser } from "../store/spotifyUser";
 import { Link } from "react-router-dom";
-import { fetchCurrentTrack } from "../store/spotifyTrack";
-import { fetchTrackInfo } from "../store/trackInfo";
 import NowPlaying from "./NowPlaying";
 import PlayListBar from "./PlayListBar";
+import { fetchTrackSuggestions } from "../store/suggestions";
+import SingleSuggestedTrack from "./SingleSuggestedTrack";
 
 class Suggestions extends Component {
   componentDidMount() {
-    this.props.fetchUser();
-    //console.log("user loaded");
-    this.props.fetchTrack();
-    //console.log("track mounted!");
-    this.props.fetchTrackInfo();
-    //console.log("info mounted");
+    this.props.fetchSuggestions();
   }
 
   render() {
-    //console.log("User Props", this.props);
-    const userInfo = this.props.user.user;
-    if (!userInfo) {
+    console.log("props suggestions", this.props.suggestions.tracks);
+    const suggestionArr = this.props.suggestions.tracks;
+    if (!suggestionArr) {
       return (
         <div>
-          <h3>loading...</h3>
+          <h2>loading..</h2>
         </div>
       );
     }
-    const { displayName, photos, profileUrl } = this.props.user.user;
-    //const displayImage = photos[0].value;
     return (
       <div className="whole-page">
         <PlayListBar />
-        <div className="visuals-container">
-          <h1>Hello {displayName}!!</h1>
-        </div>
         <NowPlaying />
+        <div className="Suggestions-container">
+          <h1>Hello !!</h1>
+          {suggestionArr.map((track) => {
+            return (
+              <ul>
+                <SingleSuggestedTrack
+                  key={suggestionArr.indexOf(track)}
+                  track={track}
+                />
+              </ul>
+            );
+          })}
+        </div>
       </div>
     );
   }
@@ -43,17 +45,13 @@ class Suggestions extends Component {
 
 const mapState = (state) => {
   return {
-    user: state.user,
-    track: state.track,
-    trackInfo: state.trackInfo,
+    suggestions: state.suggestions,
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
-    fetchUser: () => dispatch(fetchUser()),
-    fetchTrack: () => dispatch(fetchCurrentTrack()),
-    fetchTrackInfo: () => dispatch(fetchTrackInfo()),
+    fetchSuggestions: () => dispatch(fetchTrackSuggestions()),
   };
 };
 

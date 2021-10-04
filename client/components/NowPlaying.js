@@ -35,27 +35,21 @@ class NowPlaying extends Component {
     const title = item.name;
     const albumTitle = album.name;
     const artist = artists[0].name;
-    const { displayName, photos, profileUrl } = this.props.user.user;
-    const displayImage = photos[0].value;
     return (
-      <div className="bottom-bar-container">
-        <div className="current-track-info">
-          <h2>Now Playing:</h2>
-          <img src={imageSrc} />
+      <>
+        <h2>Now Playing:</h2>
+        <div className="now-playing-container">
+          <div>
+            <img id="album-art" src={imageSrc} />
+          </div>
+
           <div className="track-text">
             <p>{title}</p>
             <p>{albumTitle}</p>
             <p>{artist}</p>
           </div>
         </div>
-        <div className="user-info">
-          {/* <img src={displayImage} /> */}
-          <h3>Logged-In as: {displayName}!</h3>
-          <a href={profileUrl}>
-            <h3>Your Profile...</h3>
-          </a>
-        </div>
-      </div>
+      </>
     );
   }
 }
@@ -78,3 +72,13 @@ const mapDispatch = (dispatch) => {
 };
 
 export default connect(mapState, mapDispatch)(NowPlaying);
+
+{
+  /* <div className="user-info">
+          {/* <img src={displayImage} /> */
+}
+//   <h3>Logged-In as: {displayName}!</h3>
+//   <a href={profileUrl}>
+//     <h3>Your Profile...</h3>
+//   </a>
+// </div> */}
