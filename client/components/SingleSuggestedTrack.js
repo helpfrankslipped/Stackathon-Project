@@ -44,9 +44,9 @@ class SingleSuggestedTrack extends Component {
           <button id="add" onClick={() => addToPlaylist(id)}>
             +
           </button>
-          <p>{name}</p>
-          <p>{album.name}</p>
-          <p>{artists[0].name}</p>
+          <p>Track: {name}</p>
+          <p>Album: {`${album.name}  `}</p>
+          <p>Artist: {artists[0].name}</p>
         </span>
       </li>
     );

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchCurrentTrack } from "../store/spotifyTrack";
 import { fetchUser } from "../store/spotifyUser";
+import Playback from "./Playback";
 
 class NowPlaying extends Component {
   constructor() {
@@ -36,8 +37,8 @@ class NowPlaying extends Component {
     const albumTitle = album.name;
     const artist = artists[0].name;
     return (
-      <>
-        <h2>Now Playing:</h2>
+      <div>
+        <h2 id="now-playing-title">Now Playing:</h2>
         <div className="now-playing-container">
           <div>
             <img id="album-art" src={imageSrc} />
@@ -48,8 +49,9 @@ class NowPlaying extends Component {
             <p>{albumTitle}</p>
             <p>{artist}</p>
           </div>
+          {/* <Playback /> */}
         </div>
-      </>
+      </div>
     );
   }
 }

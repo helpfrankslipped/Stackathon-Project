@@ -72,6 +72,7 @@ spotifyRouter.get(
       "playlist-read-private",
       "playlist-modify-private",
       "playlist-modify-public",
+      "user-modify-playback-state",
     ],
     showDialog: true,
   })

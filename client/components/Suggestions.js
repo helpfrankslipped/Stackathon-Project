@@ -5,6 +5,7 @@ import NowPlaying from "./NowPlaying";
 import PlayListBar from "./PlayListBar";
 import { fetchTrackSuggestions } from "../store/suggestions";
 import SingleSuggestedTrack from "./SingleSuggestedTrack";
+import Filters from "./Filters";
 
 class Suggestions extends Component {
   componentDidMount() {
@@ -23,19 +24,22 @@ class Suggestions extends Component {
     return (
       <div className="whole-page">
         <PlayListBar />
-        <NowPlaying />
-        <div className="Suggestions-container">
-          <h1>Hello !!</h1>
-          {suggestionArr.map((track) => {
-            return (
-              <ul>
-                <SingleSuggestedTrack
-                  key={suggestionArr.indexOf(track)}
-                  track={track}
-                />
-              </ul>
-            );
-          })}
+        <Filters />
+        <div className="center-page">
+          <NowPlaying />
+          <div className="suggestions-container">
+            <h3>Suggested from Current Track:</h3>
+            {suggestionArr.map((track) => {
+              return (
+                <ul>
+                  <SingleSuggestedTrack
+                    key={suggestionArr.indexOf(track)}
+                    track={track}
+                  />
+                </ul>
+              );
+            })}
+          </div>
         </div>
       </div>
     );

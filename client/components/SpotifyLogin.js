@@ -10,8 +10,8 @@ class SpotifyLogin extends Component {
   render() {
     return (
       <div>
-        <a href="/auth/spotify">
-          <h2>Click to log in with spotify!</h2>
+        <a id="login" href="/auth/spotify">
+          <h2>Click to log in with Spotify!</h2>
         </a>
       </div>
     );
