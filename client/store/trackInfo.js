@@ -28,7 +28,7 @@ const fetchTrackInfo = () => {
       );
       //console.log("track info", currentTrack);
 
-      const { data: trackInfo } = await axios.get(
+      const { data: trackAnalysis } = await axios.get(
         `https://api.spotify.com/v1/audio-analysis/${currentTrack.item.id}`,
         {
           headers: {
@@ -36,8 +36,18 @@ const fetchTrackInfo = () => {
           },
         }
       );
-      //console.log("info!!!", trackInfo);
-      dispatch(getTrackInfo(trackInfo));
+
+      const { data: trackFeatures } = await axios.get(
+        `https://api.spotify.com/v1/audio-features/${currentTrack.item.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+          },
+        }
+      );
+      console.log("features", trackFeatures);
+      console.log("info!!!", trackAnalysis);
+      dispatch(getTrackInfo(trackAnalysis));
     } catch (error) {
       return `Error ${error.message} fetch info issue`;
     }

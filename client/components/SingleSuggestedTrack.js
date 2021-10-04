@@ -12,18 +12,19 @@ class SingleSuggestedTrack extends Component {
   async addToPlaylist(spotifyId) {
     console.log(spotifyId);
     const access_token = await getToken();
+
     const playlistId = "5KrDqmtEYJeQ47UsnbpdR4";
     try {
       const { data: newSong } = await axios.post(
         `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
         {
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${access_token}`,
-          },
           data: {
             uris: `spotify:track:${spotifyId}`,
+          },
+          headers: {
+            Accept: "application/json",
+            "content-type": "application/json",
+            Authorization: `bearer ${access_token}`,
           },
         }
       );
@@ -36,7 +37,7 @@ class SingleSuggestedTrack extends Component {
   render() {
     const { addToPlaylist } = this;
     const { name, album, artists, id } = this.props.track;
-    console.log("treak", id);
+    //console.log("treak", id);
     const key = this.props.key;
     return (
       <li key={key}>

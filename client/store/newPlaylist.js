@@ -32,7 +32,7 @@ const getNewPlaylist = () => {
           },
         }
       );
-      console.log("userPlaylist", userPlaylist);
+      //console.log("userPlaylist", userPlaylist);
       dispatch(getPlaylist(userPlaylist));
     } catch (error) {
       return `Error ${error.message} GET playlist`;

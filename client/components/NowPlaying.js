@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchCurrentTrack } from "../store/spotifyTrack";
 import { fetchUser } from "../store/spotifyUser";
+import { fetchTrackInfo } from "../store/trackInfo";
 import Playback from "./Playback";
 
 class NowPlaying extends Component {
@@ -12,10 +13,12 @@ class NowPlaying extends Component {
   componentDidMount() {
     this.props.fetchTrack();
     this.props.fetchUser();
+    this.props.fetchTrackInfo();
   }
 
   render() {
     // user stuff
+    console.log("props", this.props.trackInfo);
     const userInfo = this.props.user.user;
 
     // track stuff
@@ -29,9 +32,9 @@ class NowPlaying extends Component {
       );
     }
     const { album, artists } = this.props.track.item;
-    console.log("track", this.props.track);
-    console.log("artist", artists);
-    console.log("album", album);
+    // console.log("track", this.props.track);
+    // console.log("artist", artists);
+    // console.log("album", album);
     const imageSrc = album.images[0].url;
     const title = item.name;
     const albumTitle = album.name;
@@ -63,6 +66,7 @@ const mapState = (state) => {
   return {
     user: state.user,
     track: state.track,
+    trackInfo: state.trackInfo,
   };
 };
 
@@ -70,6 +74,7 @@ const mapDispatch = (dispatch) => {
   return {
     fetchTrack: () => dispatch(fetchCurrentTrack()),
     fetchUser: () => dispatch(fetchUser()),
+    fetchTrackInfo: () => dispatch(fetchTrackInfo()),
   };
 };
 

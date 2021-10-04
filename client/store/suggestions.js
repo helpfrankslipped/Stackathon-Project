@@ -16,6 +16,7 @@ const fetchTrackSuggestions = () => {
   return async (dispatch) => {
     const access_token = await getToken();
     const currentTrack = await returnCurrentTrack();
+    console.log("TOKEN!", access_token);
     try {
       const { data: trackSuggestions } = await axios.get(
         "https://api.spotify.com/v1/recommendations",
@@ -23,8 +24,9 @@ const fetchTrackSuggestions = () => {
           params: {
             limit: 10,
             seed_artists: currentTrack.item.artists[0].id,
-            seed_genres: "rock",
+            seed_genres: "techno, house",
             seed_tracks: currentTrack.item.id,
+            min_tempo: 140,
           },
           headers: {
             Authorization: `Bearer ${access_token}`,
