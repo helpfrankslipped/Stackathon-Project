@@ -22,7 +22,7 @@ const createPlaylist = (playlistObj) => {
 const getNewPlaylist = () => {
   return async (dispatch) => {
     const access_token = await getToken();
-    const playlistId = "1yy3mVwhTfkzj5sUxvjjLA";
+    const playlistId = "5KrDqmtEYJeQ47UsnbpdR4";
     try {
       const { data: userPlaylist } = await axios.get(
         `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
@@ -32,13 +32,13 @@ const getNewPlaylist = () => {
           },
         }
       );
+      console.log("userPlaylist", userPlaylist);
       dispatch(getPlaylist(userPlaylist));
     } catch (error) {
       return `Error ${error.message} GET playlist`;
     }
   };
 };
-
 const createNewPlaylist = () => {
   return async (dispatch) => {
     const access_token = getToken();

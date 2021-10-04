@@ -48,3 +48,4 @@ const mapDispatch = (dispatch) => {
 };
 
 export default connect(mapState, mapDispatch)(PlayListBar);
+
