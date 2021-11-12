@@ -38,9 +38,9 @@ class SingleSuggestedTrack extends Component {
     const { addToPlaylist } = this;
     const { name, album, artists, id } = this.props.track;
     //console.log("treak", id);
-    const key = this.props.key;
+
     return (
-      <li key={key}>
+      <li>
         <span className="suggested-track-info">
           <button id="add" onClick={() => addToPlaylist(id)}>
             +
