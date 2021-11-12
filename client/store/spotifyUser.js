@@ -15,7 +15,7 @@ const fetchUser = () => {
   return async (dispatch) => {
     try {
       const { data: userInfo } = await axios.get("/user");
-      //console.log("thunk user info", userInfo);
+      //console.log("thunk user info", userInfo.user.id);
       dispatch(showUser(userInfo));
     } catch (error) {
       return `error ${error.message}`;

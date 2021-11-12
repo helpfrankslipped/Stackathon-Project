@@ -65,7 +65,15 @@ spotifyRouter.get("/token", (req, res) => {
 spotifyRouter.get(
   "/auth/spotify",
   passport.authenticate("spotify", {
-    scope: ["user-read-email", "user-read-private", "user-read-playback-state"],
+    scope: [
+      "user-read-email",
+      "user-read-private",
+      "user-read-playback-state",
+      "playlist-read-private",
+      "playlist-modify-private",
+      "playlist-modify-public",
+      "user-modify-playback-state",
+    ],
     showDialog: true,
   })
 );

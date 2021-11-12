@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchCurrentTrack } from "../store/spotifyTrack";
 import { fetchUser } from "../store/spotifyUser";
+import { fetchTrackInfo } from "../store/trackInfo";
+import Playback from "./Playback";
 
-class TrackBar extends Component {
+class NowPlaying extends Component {
   constructor() {
     super();
   }
@@ -11,10 +13,12 @@ class TrackBar extends Component {
   componentDidMount() {
     this.props.fetchTrack();
     this.props.fetchUser();
+    this.props.fetchTrackInfo();
   }
 
   render() {
     // user stuff
+    console.log("props", this.props.trackInfo);
     const userInfo = this.props.user.user;
 
     // track stuff
@@ -28,30 +32,27 @@ class TrackBar extends Component {
       );
     }
     const { album, artists } = this.props.track.item;
-    console.log("album", album);
+    // console.log("track", this.props.track);
+    // console.log("artist", artists);
+    // console.log("album", album);
     const imageSrc = album.images[0].url;
     const title = item.name;
     const albumTitle = album.name;
     const artist = artists[0].name;
-    const { displayName, photos, profileUrl } = this.props.user.user;
-    const displayImage = photos[0].value;
     return (
-      <div className="bottom-bar-container">
-        <div className="current-track-info">
-          <h2>Now Playing:</h2>
-          <img src={imageSrc} />
+      <div>
+        <h2 id="now-playing-title">Now Playing:</h2>
+        <div className="now-playing-container">
+          <div>
+            <img id="album-art" src={imageSrc} />
+          </div>
+
           <div className="track-text">
             <p>{title}</p>
             <p>{albumTitle}</p>
             <p>{artist}</p>
           </div>
-        </div>
-        <div className="user-info">
-          {/* <img src={displayImage} /> */}
-          <h3>Logged-In as: {displayName}!</h3>
-          <a href={profileUrl}>
-            <h3>Your Profile...</h3>
-          </a>
+          {/* <Playback /> */}
         </div>
       </div>
     );
@@ -65,6 +66,7 @@ const mapState = (state) => {
   return {
     user: state.user,
     track: state.track,
+    trackInfo: state.trackInfo,
   };
 };
 
@@ -72,7 +74,18 @@ const mapDispatch = (dispatch) => {
   return {
     fetchTrack: () => dispatch(fetchCurrentTrack()),
     fetchUser: () => dispatch(fetchUser()),
+    fetchTrackInfo: () => dispatch(fetchTrackInfo()),
   };
 };
 
-export default connect(mapState, mapDispatch)(TrackBar);
+export default connect(mapState, mapDispatch)(NowPlaying);
+
+{
+  /* <div className="user-info">
+          {/* <img src={displayImage} /> */
+}
+//   <h3>Logged-In as: {displayName}!</h3>
+//   <a href={profileUrl}>
+//     <h3>Your Profile...</h3>
+//   </a>
+// </div> */}

@@ -6,12 +6,16 @@ import auth from "./auth";
 import userReducer from "./spotifyUser";
 import trackReducer from "./spotifyTrack";
 import trackInfoReducer from "./trackInfo";
+import suggestionReducer from "./suggestions";
+import playlistReducer from "./newPlaylist";
 
 const reducer = combineReducers({
   auth,
   user: userReducer,
   track: trackReducer,
   trackInfo: trackInfoReducer,
+  suggestions: suggestionReducer,
+  playlist: playlistReducer,
 });
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
