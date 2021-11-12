@@ -23,11 +23,6 @@ class Suggestions extends Component {
       );
     }
     return (
-      // <div className="whole-page">
-      //   <PlayListBar />
-      //   <Filters />
-      //   <div className="center-page">
-      //     <NowPlaying />
       <div className="suggestions-container">
         <h3>Suggested from Current Track:</h3>
         <ul>
@@ -40,8 +35,6 @@ class Suggestions extends Component {
           })}
         </ul>
       </div>
-      //   </div>
-      // </div>
     );
   }
 }
