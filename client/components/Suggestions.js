@@ -14,6 +14,7 @@ class Suggestions extends Component {
 
   render() {
     const suggestionArr = this.props.suggestions.tracks;
+    console.log("suggest", suggestionArr);
     if (!suggestionArr) {
       return (
         <div>
@@ -22,26 +23,24 @@ class Suggestions extends Component {
       );
     }
     return (
-      <div className="whole-page">
-        <PlayListBar />
-        <Filters />
-        <div className="center-page">
-          <NowPlaying />
-          <div className="suggestions-container">
-            <h3>Suggested from Current Track:</h3>
-            {suggestionArr.map((track) => {
-              return (
-                <ul>
-                  <SingleSuggestedTrack
-                    key={suggestionArr.indexOf(track)}
-                    track={track}
-                  />
-                </ul>
-              );
-            })}
-          </div>
-        </div>
+      // <div className="whole-page">
+      //   <PlayListBar />
+      //   <Filters />
+      //   <div className="center-page">
+      //     <NowPlaying />
+      <div className="suggestions-container">
+        <h3>Suggested from Current Track:</h3>
+        {suggestionArr.map((track) => {
+          return (
+            <SingleSuggestedTrack
+              key={suggestionArr.indexOf(track)}
+              track={track}
+            />
+          );
+        })}
       </div>
+      //   </div>
+      // </div>
     );
   }
 }

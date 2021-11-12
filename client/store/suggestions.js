@@ -33,8 +33,10 @@ const fetchTrackSuggestions = () => {
           },
         }
       );
+
       dispatch(getTrackSuggestions(trackSuggestions));
     } catch (error) {
+      console.log("oh no");
       return `Error ${error.message} suggestions thunk`;
     }
   };

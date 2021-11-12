@@ -29,7 +29,7 @@ class Routes extends Component {
         ) : ( */}
         <Switch>
           <Route exact path="/" exact component={SpotifyLogin} />
-          <Route exact path="/visuals" component={Suggestions} />
+          <Route exact path="/visuals" component={Home} />
         </Switch>
         {/* )} */}
       </div>
