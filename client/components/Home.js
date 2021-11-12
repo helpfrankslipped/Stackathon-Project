@@ -12,16 +12,16 @@ export const Home = (props) => {
 
   return (
     <div className="whole-page">
-      <div id="sidebars">
+      {/* <div id="sidebars">
         <PlayListBar />
         <Filters />
-      </div>
+      </div> */}
       <div className="center-page">
         <NowPlaying />
       </div>
-      <div className="suggestions-container">
+      {/* <div className="suggestions-container">
         <Suggestions />
-      </div>
+      </div> */}
     </div>
   );
 };

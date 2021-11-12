@@ -40,7 +40,7 @@ class SingleSuggestedTrack extends Component {
     //console.log("treak", id);
 
     return (
-      <li>
+      <>
         <span className="suggested-track-info">
           <button id="add" onClick={() => addToPlaylist(id)}>
             +
@@ -49,7 +49,7 @@ class SingleSuggestedTrack extends Component {
           <p>Album: {`${album.name}  `}</p>
           <p>Artist: {artists[0].name}</p>
         </span>
-      </li>
+      </>
     );
   }
 }

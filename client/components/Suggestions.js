@@ -30,14 +30,15 @@ class Suggestions extends Component {
       //     <NowPlaying />
       <div className="suggestions-container">
         <h3>Suggested from Current Track:</h3>
-        {suggestionArr.map((track) => {
-          return (
-            <SingleSuggestedTrack
-              key={suggestionArr.indexOf(track)}
-              track={track}
-            />
-          );
-        })}
+        <ul>
+          {suggestionArr.map((track) => {
+            return (
+              <li key={suggestionArr.indexOf(track)}>
+                <SingleSuggestedTrack track={track} />
+              </li>
+            );
+          })}
+        </ul>
       </div>
       //   </div>
       // </div>
